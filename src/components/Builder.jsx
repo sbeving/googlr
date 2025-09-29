@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
+import storageManager from '../utils/storage.js'
 import { PRESET_CATEGORIES, expandTemplate, generateExplanation } from '../utils/templates.js'
 import { validateDork } from '../utils/validator.js'
-import storageManager from '../utils/storage.js'
 import Preview from './Preview.jsx'
 import TemplateEditor from './TemplateEditor.jsx'
 

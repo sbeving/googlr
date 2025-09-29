@@ -591,4 +591,4 @@ class LocalStorageManager {
 const storageManager = new LocalStorageManager()
 
 export default storageManager
-export { STORAGE_KEYS, DEFAULT_PREFERENCES }
+export { DEFAULT_PREFERENCES, STORAGE_KEYS }
