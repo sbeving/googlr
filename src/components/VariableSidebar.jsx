@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const VariableSidebar = ({ template, variables, onVariableChange, isOpen, onToggle }) => {
   const [sidebarWidth, setSidebarWidth] = useState('320px')

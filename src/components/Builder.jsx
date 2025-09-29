@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import storageManager from '../utils/storage.js'
 import { PRESET_CATEGORIES, expandTemplate, generateExplanation } from '../utils/templates.js'
 import { validateDork } from '../utils/validator.js'
+import AdvancedCTI from './AdvancedCTI.jsx'
 import Preview from './Preview.jsx'
 import TemplateEditor from './TemplateEditor.jsx'
-import AdvancedCTI from './AdvancedCTI.jsx'
 import VariableSidebar from './VariableSidebar.jsx'
 
 const Builder = () => {

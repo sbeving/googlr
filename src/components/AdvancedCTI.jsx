@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { CTI_FRAMEWORKS, ADVANCED_OPERATORS, THREAT_PATTERNS, EXPORT_TEMPLATES } from '../utils/templates.js'
-import { validateDork } from '../utils/validator.js'
+import { useState } from 'react'
 import storageManager from '../utils/storage.js'
+import { CTI_FRAMEWORKS } from '../utils/templates.js'
+import { validateDork } from '../utils/validator.js'
 
 const AdvancedCTI = ({ onDorkGenerated }) => {
   const [selectedFramework, setSelectedFramework] = useState('')
