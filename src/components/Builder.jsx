@@ -4,6 +4,8 @@ import { PRESET_CATEGORIES, expandTemplate, generateExplanation } from '../utils
 import { validateDork } from '../utils/validator.js'
 import Preview from './Preview.jsx'
 import TemplateEditor from './TemplateEditor.jsx'
+import AdvancedCTI from './AdvancedCTI.jsx'
+import VariableSidebar from './VariableSidebar.jsx'
 
 const Builder = () => {
   const [selectedCategory, setSelectedCategory] = useState('')
@@ -22,6 +24,7 @@ const Builder = () => {
   const [usageStats, setUsageStats] = useState({})
   const [autoSaveEnabled, setAutoSaveEnabled] = useState(true)
   const [sessionRestored, setSessionRestored] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     // Load all data from enhanced localStorage manager
@@ -143,6 +146,12 @@ const Builder = () => {
   const handleTemplateChange = (template) => {
     setSelectedTemplate(template)
     setVariables({})
+    
+    // Check if template has variables and auto-open sidebar
+    const hasVariables = template && template.match(/\{([^}]+)\}/g)
+    if (hasVariables && hasVariables.length > 0) {
+      setSidebarOpen(true)
+    }
     
     // Update usage stats
     storageManager.updateUsageStats('templatesUsed', 1, template)
@@ -512,56 +521,61 @@ const Builder = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto relative">
       {/* Navigation Tabs */}
-      <div className="mb-6">
-        <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8">
+      <div className="mb-8">
+        <div className="cti-nav">
+          <nav className="flex space-x-0 overflow-x-auto">
             {[
-              { key: 'templates', label: '📝 Templates' },
-              { key: 'custom', label: '⚙️ Custom' },
-              { key: 'recent', label: '🕒 Recent' },
-              { key: 'favorites', label: '⭐ Favorites' },
-              { key: 'presets', label: '💾 Presets' },
-              { key: 'stats', label: '📈 Stats' },
-              { key: 'audit', label: '📊 Audit Log' }
+              { key: 'templates', label: '📝 Templates', desc: 'Basic Categories' },
+              { key: 'cti', label: '🎯 Advanced CTI', desc: 'Professional Frameworks' },
+              { key: 'custom', label: '⚙️ Custom', desc: 'Manual Dorks' },
+              { key: 'recent', label: '🕒 Recent', desc: 'Query History' },
+              { key: 'favorites', label: '⭐ Favorites', desc: 'Saved Templates' },
+              { key: 'presets', label: '💾 Presets', desc: 'Saved Configs' },
+              { key: 'stats', label: '📈 Stats', desc: 'Usage Analytics' },
+              { key: 'audit', label: '📊 Audit Log', desc: 'Activity Monitor' }
             ].map(tab => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === tab.key
-                    ? 'border-accent text-accent'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                className={`cti-nav-tab flex-shrink-0 ${
+                  activeTab === tab.key ? 'active' : ''
                 }`}
               >
-                {tab.label}
+                <div className="font-medium">{tab.label}</div>
+                <div className="text-xs opacity-75 mt-1">{tab.desc}</div>
               </button>
             ))}
           </nav>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className={`grid gap-6 transition-all duration-300 ${
+        sidebarOpen ? 'grid-cols-1 xl:grid-cols-2 pr-80' : 'grid-cols-1 lg:grid-cols-2'
+      }`}>
         {/* Left Column - Editor */}
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           {activeTab === 'templates' && (
             <>
               {/* Category Selection */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-semibold mb-4">Select Category</h3>
-                <div className="grid grid-cols-1 gap-2">
+              <div className="cti-card p-6">
+                <h3 className="text-lg font-semibold mb-4 text-gray-200">🎯 Threat Intelligence Categories</h3>
+                <div className="grid grid-cols-1 gap-3">
                   {Object.keys(PRESET_CATEGORIES).map(category => (
                     <button
                       key={category}
                       onClick={() => handleCategoryChange(category)}
-                      className={`p-3 text-left rounded-lg border transition-colors ${
+                      className={`p-4 text-left rounded-lg border transition-all duration-200 ${
                         selectedCategory === category
-                          ? 'bg-accent text-white border-accent'
-                          : 'bg-gray-50 hover:bg-gray-100 border-gray-200'
+                          ? 'cti-btn-primary'
+                          : 'cti-btn-framework'
                       }`}
                     >
-                      {category}
+                      <div className="font-medium">{category}</div>
+                      <div className="text-sm opacity-75 mt-1">
+                        {PRESET_CATEGORIES[category].length} templates available
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -569,32 +583,34 @@ const Builder = () => {
 
               {/* Template Selection */}
               {selectedCategory && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-4">Select Template</h3>
-                  <div className="space-y-2">
+                <div className="cti-card p-6">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-200">
+                    📋 {selectedCategory} Templates
+                  </h3>
+                  <div className="space-y-3 max-h-96 overflow-y-auto cti-scrollbar">
                     {PRESET_CATEGORIES[selectedCategory].map((template, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <button
                           onClick={() => handleTemplateChange(template)}
-                          className={`p-3 text-left rounded-lg border transition-colors flex-1 ${
+                          className={`p-3 text-left rounded-lg border transition-all flex-1 cti-code text-sm ${
                             selectedTemplate === template
-                              ? 'bg-accent text-white border-accent'
-                              : 'bg-gray-50 hover:bg-gray-100 border-gray-200'
+                              ? 'border-blue-400 bg-blue-900/30'
+                              : 'border-gray-600 hover:border-gray-500 hover:bg-gray-800/50'
                           }`}
                         >
-                          <code className="text-sm">{template}</code>
+                          {template}
                         </button>
                         <button
                           onClick={() => isFavoriteTemplate(template) 
                             ? removeFromFavorites(template) 
                             : addToFavorites(template, selectedCategory)
                           }
-                          className={`p-2 rounded-lg border transition-colors ${
+                          className={`p-3 rounded-lg border transition-all cti-tooltip ${
                             isFavoriteTemplate(template)
-                              ? 'bg-yellow-100 text-yellow-600 border-yellow-300'
-                              : 'bg-gray-100 text-gray-400 border-gray-300 hover:text-yellow-500'
+                              ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50'
+                              : 'border-gray-600 text-gray-400 hover:text-yellow-400 hover:border-yellow-500/50'
                           }`}
-                          title={isFavoriteTemplate(template) ? 'Remove from favorites' : 'Add to favorites'}
+                          data-tooltip={isFavoriteTemplate(template) ? 'Remove from favorites' : 'Add to favorites'}
                         >
                           ⭐
                         </button>
@@ -615,28 +631,86 @@ const Builder = () => {
             </>
           )}
 
+          {activeTab === 'cti' && (
+            <AdvancedCTI onDorkGenerated={(dorks, metadata) => {
+              // Handle generated dorks from CTI component
+              setGeneratedDorks(dorks)
+              setExplanation(`Generated ${dorks.length} dorks using ${metadata.framework || metadata.type} method`)
+              
+              // Save to recent dorks with metadata
+              dorks.forEach(dork => {
+                storageManager.addRecentDork(dork, {
+                  source: 'CTI Framework',
+                  framework: metadata.framework,
+                  technique: metadata.technique,
+                  type: metadata.type
+                })
+              })
+              
+              // Validate all generated dorks
+              const validation = dorks.map(dork => validateDork(dork))
+              setValidationResults(validation)
+              
+              // Update recent dorks state
+              setRecentDorks(storageManager.getRecentDorks(userPreferences.maxRecentDorks || 20))
+              
+              logAction('CTI_DORKS_GENERATED', { 
+                count: dorks.length, 
+                metadata 
+              })
+            }} />
+          )}
+
           {activeTab === 'custom' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-4">Custom Dork</h3>
-              <textarea
-                value={customDork}
-                onChange={(e) => handleCustomDorkChange(e.target.value)}
-                className="w-full h-32 p-3 border border-gray-300 rounded-lg font-mono text-sm"
-                placeholder="Enter your custom Google dork here..."
-              />
+            <div className="cti-card p-6">
+              <h3 className="text-lg font-semibold mb-4 text-gray-200 flex items-center gap-2">
+                ⚙️ Custom Dork Builder
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    🔧 Custom Google Dork:
+                  </label>
+                  <textarea
+                    value={customDork}
+                    onChange={(e) => handleCustomDorkChange(e.target.value)}
+                    className="w-full h-40 p-4 bg-gray-800 border border-gray-600 rounded-lg font-mono text-sm text-gray-200 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all cti-scrollbar"
+                    placeholder="Enter your custom Google dork here...&#10;&#10;Examples:&#10;filetype:pdf intext:&quot;confidential&quot;&#10;site:example.com intitle:&quot;admin&quot;&#10;inurl:&quot;/admin/&quot; filetype:php"
+                  />
+                </div>
+                
+                <div className="cti-message cti-message-info">
+                  <p className="font-medium text-blue-300 mb-2">💡 Custom Dork Tips:</p>
+                  <ul className="text-sm text-blue-200 space-y-1">
+                    <li>• Use quotes for exact phrases: "admin panel"</li>
+                    <li>• Combine operators: site:domain.com filetype:pdf</li>
+                    <li>• Use wildcards: intitle:"index of" *password*</li>
+                    <li>• Add variables with {'{variable}'} for reusability</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           )}
 
           {activeTab === 'recent' && (
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold">Recent Dorks</h3>
-                <button
-                  onClick={clearRecentDorks}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-                >
-                  Clear All
-                </button>
+            <div className="cti-card p-6">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                <h3 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
+                  🕒 Recent Dorks
+                  {recentDorks.length > 0 && (
+                    <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">
+                      {recentDorks.length} recent
+                    </span>
+                  )}
+                </h3>
+                {recentDorks.length > 0 && (
+                  <button
+                    onClick={clearRecentDorks}
+                    className="cti-btn px-4 py-2 bg-red-600/20 text-red-300 border border-red-500/30 rounded-lg hover:bg-red-600/30 transition-all"
+                  >
+                    🗑️ Clear All
+                  </button>
+                )}
               </div>
               
               {recentDorks.length === 0 ? (
@@ -901,7 +975,7 @@ const Builder = () => {
         </div>
 
         {/* Right Column - Preview */}
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           <Preview
             dorks={generatedDorks}
             explanation={explanation}
@@ -912,6 +986,15 @@ const Builder = () => {
           />
         </div>
       </div>
+
+      {/* Variables Sidebar */}
+      <VariableSidebar
+        template={selectedTemplate}
+        variables={variables}
+        onVariableChange={handleVariableChange}
+        isOpen={sidebarOpen}
+        onToggle={() => setSidebarOpen(!sidebarOpen)}
+      />
     </div>
   )
 }

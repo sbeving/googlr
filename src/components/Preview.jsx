@@ -5,10 +5,10 @@ const Preview = ({ dorks, explanation, validationResults, onCopy, onExport, onOp
   const displayLimit = 5
 
   const getValidationColor = (validation) => {
-    if (!validation) return 'text-gray-500'
-    if (validation.errors.length > 0) return 'text-red-600'
-    if (validation.warnings.length > 0) return 'text-yellow-600'
-    return 'text-green-600'
+    if (!validation) return 'text-gray-400'
+    if (validation.errors.length > 0) return 'text-red-400'
+    if (validation.warnings.length > 0) return 'text-yellow-400'
+    return 'text-green-400'
   }
 
   const getValidationIcon = (validation) => {
@@ -18,31 +18,48 @@ const Preview = ({ dorks, explanation, validationResults, onCopy, onExport, onOp
     return '✅'
   }
 
+  const getValidationBg = (validation) => {
+    if (!validation) return 'bg-gray-500/10 border-gray-500/30'
+    if (validation.errors.length > 0) return 'bg-red-500/10 border-red-500/30'
+    if (validation.warnings.length > 0) return 'bg-yellow-500/10 border-yellow-500/30'
+    return 'bg-green-500/10 border-green-500/30'
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-0">
       {/* Generated Dorks */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Generated Dorks</h3>
+      <div className="cti-card p-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+          <h3 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
+            🔍 Generated Dorks
+            {dorks.length > 0 && (
+              <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">
+                {dorks.length} result{dorks.length !== 1 ? 's' : ''}
+              </span>
+            )}
+          </h3>
           {dorks.length > 0 && (
-            <div className="space-x-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => onExport('txt')}
-                className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+                className="cti-btn-framework px-3 py-2 text-xs rounded-lg transition-all hover:bg-gray-600"
+                title="Export as plain text"
               >
-                Export TXT
+                📄 TXT
               </button>
               <button
                 onClick={() => onExport('csv')}
-                className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+                className="cti-btn-framework px-3 py-2 text-xs rounded-lg transition-all hover:bg-gray-600"
+                title="Export as CSV"
               >
-                Export CSV
+                📊 CSV
               </button>
               <button
                 onClick={() => onExport('json')}
-                className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+                className="cti-btn-framework px-3 py-2 text-xs rounded-lg transition-all hover:bg-gray-600"
+                title="Export as JSON"
               >
-                Export JSON
+                📋 JSON
               </button>
             </div>
           )}
@@ -102,9 +119,9 @@ const Preview = ({ dorks, explanation, validationResults, onCopy, onExport, onOp
             {dorks.length > displayLimit && (
               <button
                 onClick={() => setShowAllDorks(!showAllDorks)}
-                className="w-full py-2 text-accent hover:text-blue-600 text-sm"
+                className="w-full py-3 text-blue-400 hover:text-blue-300 text-sm font-medium border border-blue-500/30 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 transition-all"
               >
-                {showAllDorks ? 'Show Less' : `Show All ${dorks.length} Dorks`}
+                {showAllDorks ? '📤 Show Less' : `📥 Show All ${dorks.length} Dorks`}
               </button>
             )}
           </div>
@@ -113,12 +130,14 @@ const Preview = ({ dorks, explanation, validationResults, onCopy, onExport, onOp
 
       {/* Explanation */}
       {explanation && (
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-semibold mb-4">🔍 Dork Explanation</h3>
+        <div className="cti-card p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-200 flex items-center gap-2">
+            🔍 Dork Explanation
+          </h3>
           <div className="prose prose-sm max-w-none">
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+            <div className="cti-message cti-message-info">
               {explanation.split('\n').map((line, index) => (
-                <p key={index} className="mb-2 last:mb-0">
+                <p key={index} className="mb-2 last:mb-0 text-blue-200">
                   {line}
                 </p>
               ))}

@@ -1,0 +1,620 @@
+/* Professional CTI Theme - Dark Mode for Advanced Users */
+:root {
+  /* CTI Professional Color Palette */
+  --cti-primary: #0f172a;        /* Deep Navy */
+  --cti-secondary: #1e293b;      /* Slate 800 */
+  --cti-accent: #3b82f6;         /* Blue 500 */
+  --cti-accent-hover: #2563eb;   /* Blue 600 */
+  --cti-success: #10b981;        /* Emerald 500 */
+  --cti-warning: #f59e0b;        /* Amber 500 */
+  --cti-danger: #ef4444;         /* Red 500 */
+  --cti-info: #06b6d4;           /* Cyan 500 */
+  
+  /* Text Colors */
+  --cti-text-primary: #f8fafc;   /* Slate 50 */
+  --cti-text-secondary: #cbd5e1; /* Slate 300 */
+  --cti-text-muted: #64748b;     /* Slate 500 */
+  
+  /* Background Colors */
+  --cti-bg-primary: #020617;     /* Slate 950 */
+  --cti-bg-secondary: #0f172a;   /* Slate 900 */
+  --cti-bg-tertiary: #1e293b;    /* Slate 800 */
+  --cti-bg-card: #334155;        /* Slate 700 */
+  
+  /* Border Colors */
+  --cti-border-primary: #475569;  /* Slate 600 */
+  --cti-border-secondary: #64748b; /* Slate 500 */
+  
+  /* Framework-specific colors */
+  --mitre-color: #dc2626;        /* Red 600 - MITRE ATT&CK */
+  --diamond-color: #7c3aed;      /* Violet 600 - Diamond Model */
+  --killchain-color: #ea580c;    /* Orange 600 - Kill Chain */
+  --osint-color: #059669;        /* Emerald 600 - OSINT */
+  --malware-color: #7c2d12;      /* Red 900 - Malware */
+  --forensics-color: #1d4ed8;    /* Blue 700 - Forensics */
+}
+
+/* Dark Mode Base Styles */
+.cti-dark {
+  background-color: var(--cti-bg-primary);
+  color: var(--cti-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.cti-dark * {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Professional Card Styling */
+.cti-card {
+  background: linear-gradient(135deg, var(--cti-bg-secondary) 0%, var(--cti-bg-tertiary) 100%);
+  border: 1px solid var(--cti-border-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  overflow: hidden; /* Prevent content overflow */
+  min-height: fit-content;
+  max-width: 100%;
+}
+
+.cti-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Responsive card sizing */
+.cti-card-sm {
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.cti-card-lg {
+  padding: 24px;
+  border-radius: 16px;
+}
+
+/* Card content containers */
+.cti-card-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.cti-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Advanced Button Styles */
+.cti-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cti-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.cti-btn:hover::before {
+  left: 100%;
+}
+
+.cti-btn-primary {
+  background: linear-gradient(135deg, var(--cti-accent) 0%, var(--cti-accent-hover) 100%);
+  color: white;
+}
+
+.cti-btn-primary:hover {
+  background: linear-gradient(135deg, var(--cti-accent-hover) 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.cti-btn-framework {
+  background: var(--cti-bg-card);
+  color: var(--cti-text-primary);
+  border: 1px solid var(--cti-border-primary);
+}
+
+.cti-btn-framework:hover {
+  background: var(--cti-accent);
+  border-color: var(--cti-accent);
+  color: white;
+}
+
+/* MITRE ATT&CK Styling */
+.mitre-technique {
+  background: linear-gradient(135deg, var(--mitre-color) 0%, #b91c1c 100%);
+  color: white;
+  border: 1px solid var(--mitre-color);
+}
+
+.mitre-technique:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+}
+
+/* Diamond Model Styling */
+.diamond-element {
+  background: linear-gradient(135deg, var(--diamond-color) 0%, #6d28d9 100%);
+  color: white;
+  border: 1px solid var(--diamond-color);
+}
+
+.diamond-element:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Kill Chain Styling */
+.killchain-phase {
+  background: linear-gradient(135deg, var(--killchain-color) 0%, #c2410c 100%);
+  color: white;
+  border: 1px solid var(--killchain-color);
+}
+
+.killchain-phase:hover {
+  background: linear-gradient(135deg, #c2410c 0%, #9a3412 100%);
+  box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4);
+}
+
+/* Professional Form Controls */
+.cti-input {
+  background: var(--cti-bg-tertiary);
+  border: 1px solid var(--cti-border-primary);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--cti-text-primary);
+  font-size: 14px;
+}
+
+.cti-input:focus {
+  outline: none;
+  border-color: var(--cti-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.cti-select {
+  background: var(--cti-bg-tertiary);
+  border: 1px solid var(--cti-border-primary);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--cti-text-primary);
+  cursor: pointer;
+}
+
+.cti-select:focus {
+  outline: none;
+  border-color: var(--cti-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Professional Table Styling */
+.cti-table {
+  background: var(--cti-bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--cti-border-primary);
+}
+
+.cti-table th {
+  background: var(--cti-bg-tertiary);
+  color: var(--cti-text-primary);
+  font-weight: 600;
+  padding: 16px;
+  border-bottom: 1px solid var(--cti-border-primary);
+}
+
+.cti-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--cti-border-primary);
+  color: var(--cti-text-secondary);
+}
+
+.cti-table tr:hover {
+  background: var(--cti-bg-tertiary);
+}
+
+/* Code and Dork Display */
+.cti-code {
+  background: var(--cti-bg-primary);
+  border: 1px solid var(--cti-border-primary);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 13px;
+  color: var(--cti-success);
+  overflow-x: auto;
+}
+
+.cti-dork {
+  background: linear-gradient(135deg, var(--cti-bg-tertiary) 0%, var(--cti-bg-card) 100%);
+  border: 1px solid var(--cti-border-primary);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cti-dork:hover {
+  border-color: var(--cti-accent);
+  background: linear-gradient(135deg, var(--cti-bg-card) 0%, var(--cti-accent) 10%);
+}
+
+.cti-dork::after {
+  content: '📋';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cti-dork:hover::after {
+  opacity: 1;
+}
+
+/* Professional Navigation Tabs */
+.cti-nav {
+  background: var(--cti-bg-secondary);
+  border-bottom: 1px solid var(--cti-border-primary);
+  border-radius: 12px 12px 0 0;
+}
+
+.cti-nav-tab {
+  padding: 16px 24px;
+  color: var(--cti-text-secondary);
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+}
+
+.cti-nav-tab:hover {
+  color: var(--cti-text-primary);
+  background: var(--cti-bg-tertiary);
+}
+
+.cti-nav-tab.active {
+  color: var(--cti-accent);
+  border-bottom-color: var(--cti-accent);
+  background: var(--cti-bg-tertiary);
+}
+
+/* Status Indicators */
+.cti-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cti-status-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--cti-success);
+  border: 1px solid var(--cti-success);
+}
+
+.cti-status-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--cti-warning);
+  border: 1px solid var(--cti-warning);
+}
+
+.cti-status-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--cti-danger);
+  border: 1px solid var(--cti-danger);
+}
+
+/* Professional Tooltips */
+.cti-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.cti-tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cti-bg-primary);
+  color: var(--cti-text-primary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  border: 1px solid var(--cti-border-primary);
+  z-index: 1000;
+}
+
+.cti-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--cti-bg-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+
+.cti-tooltip:hover::before,
+.cti-tooltip:hover::after {
+  opacity: 1;
+}
+
+/* Professional Loading Animations */
+.cti-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--cti-border-primary);
+  border-radius: 50%;
+  border-top-color: var(--cti-accent);
+  animation: cti-spin 1s ease-in-out infinite;
+}
+
+@keyframes cti-spin {
+  to { transform: rotate(360deg); }
+}
+
+.cti-pulse {
+  animation: cti-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes cti-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Professional Scrollbars */
+.cti-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.cti-scrollbar::-webkit-scrollbar-track {
+  background: var(--cti-bg-tertiary);
+  border-radius: 4px;
+}
+
+.cti-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--cti-border-primary);
+  border-radius: 4px;
+}
+
+.cti-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--cti-accent);
+}
+
+/* Export Format Icons */
+.export-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.export-stix {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.export-misp {
+  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+}
+
+.export-yara {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.export-csv {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cti-nav-tab {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .cti-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  
+  .cti-card {
+    margin: 8px;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .cti-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile sidebar adjustments */
+  .cti-sidebar-mobile {
+    width: 100vw !important;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 1280px) {
+  /* Tablet adjustments */
+  .cti-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Layout helpers */
+.cti-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.cti-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cti-grid-responsive {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.cti-flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Sidebar Styles */
+.cti-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 320px;
+  background: linear-gradient(180deg, var(--cti-bg-primary) 0%, var(--cti-bg-secondary) 100%);
+  border-left: 1px solid var(--cti-border-primary);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.cti-sidebar.open {
+  transform: translateX(0);
+}
+
+.cti-sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--cti-border-primary);
+  background: var(--cti-bg-tertiary);
+}
+
+.cti-sidebar-content {
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.cti-sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  background: var(--cti-bg-tertiary);
+  border-top: 1px solid var(--cti-border-primary);
+}
+
+/* Variable input styling */
+.cti-variable-input {
+  background: var(--cti-bg-primary);
+  border: 1px solid var(--cti-border-primary);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--cti-text-primary);
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.cti-variable-input:focus {
+  outline: none;
+  border-color: var(--cti-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background: var(--cti-bg-secondary);
+}
+
+.cti-variable-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--cti-text-secondary);
+}
+
+/* Professional Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Success/Error Messages */
+.cti-message {
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+  border-left: 4px solid;
+}
+
+.cti-message-success {
+  background: rgba(16, 185, 129, 0.1);
+  border-left-color: var(--cti-success);
+  color: var(--cti-success);
+}
+
+.cti-message-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-left-color: var(--cti-danger);
+  color: var(--cti-danger);
+}
+
+.cti-message-info {
+  background: rgba(6, 182, 212, 0.1);
+  border-left-color: var(--cti-info);
+  color: var(--cti-info);
+}

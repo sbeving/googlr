@@ -1,13 +1,40 @@
-# 🔍 Googlr - Educational Google Dork Builder
+# 🎯 Googlr CTI Pro - Advanced Threat Intelligence Platform
 
-⚠️ **IMPORTANT LEGAL NOTICE** ⚠️
-**This tool is for educational purposes and authorized security testing ONLY. You must obtain explicit written permission before testing any systems you do not own. Misuse of this tool may violate local, state, and federal laws.**
+> **Professional-grade Google dorking tool designed exclusively for certified cybersecurity threat intelligence professionals**
 
-## Overview
+## 🚀 What Makes This Special
 
-Googlr is a single-page static web application designed to help security students and penetration testers learn and craft Google dorks quickly and responsibly. This tool focuses on education and safe dork generation - it does NOT execute automated searches at scale.
+Googlr CTI Pro isn't just another dorking tool—it's a **comprehensive threat intelligence platform** that integrates industry-standard frameworks and methodologies. Built for CTI professionals who demand precision, compliance, and professional-grade features.
 
-## Features
+### 🌟 Key Differentiators
+
+- **🎯 MITRE ATT&CK Integration**: Native support for ATT&CK techniques and tactics
+- **💎 Diamond Model Framework**: Structured adversary analysis capabilities  
+- **⚔️ Cyber Kill Chain**: Phase-based threat hunting workflows
+- **📊 Professional Export**: STIX 2.1, MISP, and YARA format exports
+- **🔒 Compliance-Ready**: Built-in audit logging and professional standards
+- **🎨 Dark CTI Theme**: Professional interface designed for long analysis sessions
+
+## 🏗️ Architecture Overview
+
+```
+🎯 Googlr CTI Pro
+├── 📝 Basic Templates (Educational)
+├── 🎯 Advanced CTI (Professional)
+│   ├── MITRE ATT&CK Framework
+│   ├── Diamond Model Analysis  
+│   ├── Cyber Kill Chain
+│   ├── IOC Extraction Engine
+│   └── Automation Workflows
+├── ⚙️ Custom Dorking (Manual)
+├── 🕒 Intelligent History (Smart Storage)
+├── ⭐ Advanced Favorites (Categorized)
+├── 💾 Professional Presets (Team Sharing)
+├── 📈 Usage Analytics (Performance)
+└── 📊 Comprehensive Audit (Compliance)
+```
+
+## 🎯 Advanced CTI Features
 
 ### 🎯 Core Functionality
 - **Template-based dork generation** with variable substitution
