@@ -38,6 +38,12 @@ const Preview = ({ dorks, explanation, validationResults, onCopy, onExport, onOp
               >
                 Export CSV
               </button>
+              <button
+                onClick={() => onExport('json')}
+                className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+              >
+                Export JSON
+              </button>
             </div>
           )}
         </div>
