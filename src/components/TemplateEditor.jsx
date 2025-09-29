@@ -1,4 +1,3 @@
-import React from 'react'
 
 const TemplateEditor = ({ template, variables, onVariableChange }) => {
   // Extract variables from template

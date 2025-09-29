@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import TemplateEditor from './TemplateEditor.jsx'
-import Preview from './Preview.jsx'
+import { useEffect, useState } from 'react'
 import { PRESET_CATEGORIES, expandTemplate, generateExplanation } from '../utils/templates.js'
 import { validateDork } from '../utils/validator.js'
+import Preview from './Preview.jsx'
+import TemplateEditor from './TemplateEditor.jsx'
 
 const Builder = () => {
   const [selectedCategory, setSelectedCategory] = useState('')
