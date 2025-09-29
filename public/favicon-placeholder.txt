@@ -1,0 +1,17 @@
+# Favicon Placeholder
+
+This is a placeholder for the favicon.ico file. 
+
+To replace with an actual favicon:
+1. Create or obtain a 16x16 or 32x32 pixel icon file
+2. Name it favicon.ico
+3. Place it in the public/ directory
+
+For now, the browser will use a default icon or no icon.
+
+You can generate a favicon using online tools like:
+- https://favicon.io/
+- https://realfavicongenerator.net/
+- https://www.favicon-generator.org/
+
+Recommended icon theme: A magnifying glass (🔍) to represent the search/dork functionality.
