@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { expandTemplate, generateExplanation, PRESET_CATEGORIES } from '../src/utils/templates.js'
 
 describe('Template Engine', () => {

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { validateDork, calculateSafetyScore, sanitizeDorkInput } from '../src/utils/validator.js'
+import { describe, expect, it } from 'vitest'
+import { calculateSafetyScore, sanitizeDorkInput, validateDork } from '../src/utils/validator.js'
 
 describe('Dork Validator', () => {
   describe('validateDork', () => {
