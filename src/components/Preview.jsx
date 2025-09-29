@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const Preview = ({ dorks, explanation, validationResults, onCopy, onExport, onOpenInGoogle }) => {
   const [showAllDorks, setShowAllDorks] = useState(false)
